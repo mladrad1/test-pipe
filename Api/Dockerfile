@@ -11,7 +11,7 @@ COPY ["Api/Api.csproj", "Api/"]
 RUN dotnet restore "Api/Api.csproj"
 COPY . .
 WORKDIR "/src/Api"
-RUN dotnet build "Api.csproj" -c Release -o /app/build
+RUN dotnet build "Api.csproj" -c Release -o /app/build --no-cache
 
 FROM build AS publish
 RUN dotnet publish "Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
