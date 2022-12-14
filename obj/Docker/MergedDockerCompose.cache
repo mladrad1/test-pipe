@@ -1,0 +1,44 @@
+name: dockercompose91808370377975301
+services:
+  api:
+    build:
+      context: D:\Projects\Api
+      dockerfile: Api/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      PIPELINE_NAME: Dzoni
+    image: api
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      protocol: tcp
+    - mode: ingress
+      target: 80
+      published: "32000"
+      protocol: tcp
+    - mode: ingress
+      target: 443
+      protocol: tcp
+    - mode: ingress
+      target: 443
+      published: "32001"
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: C:\Users\Nikola Milosavljevic\AppData\Roaming/Microsoft/UserSecrets
+      target: /root/.microsoft/usersecrets
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\Nikola Milosavljevic\AppData\Roaming/ASP.NET/Https
+      target: /root/.aspnet/https
+      read_only: true
+      bind:
+        create_host_path: true
+networks:
+  default:
+    name: dockercompose91808370377975301_default
